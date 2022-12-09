@@ -1,8 +1,8 @@
-class EmptyCommand 
+class EmptyCommand
 {
   _receiver;
 
-  constructor(receiver) 
+  constructor(receiver)
   {
     this._receiver = receiver;
   }
@@ -12,7 +12,7 @@ class EmptyCommand
     this.Exec();
   }
 
-  Exec() 
+  Exec()
   {
     return false;
   }
@@ -43,13 +43,13 @@ const undoMixin = Super => class extends Super
   {
     this._receiver.CreateSnapshot(this._name);
   }
-}
+};
 
 export class WriteOperandCommand extends undoMixin(CommandWithParams)
 {
   _name = `Operand ( ${this._params.operand} )`;
 
-  Exec() 
+  Exec()
   {
     return this._receiver.WriteOperand(this._params.operand);
   }
@@ -59,17 +59,17 @@ export class WriteOperatorCommand extends undoMixin(CommandWithParams)
 {
   _name = `Operator ( ${this._params.operator.alias} )`;
 
-  Exec() 
+  Exec()
   {
     return this._receiver.WriteOperator(this._params.operator);
   }
 }
 
-export class EvaluateCommand extends undoMixin(EmptyCommand) 
+export class EvaluateCommand extends undoMixin(EmptyCommand)
 {
   _name = "Evaluate";
 
-  Exec() 
+  Exec()
   {
     return this._receiver.Evaluate();
   }
